@@ -1,0 +1,34 @@
+From: {{FROM_NAME}} <{{FROM_MAIL}}>
+Reply-To: <{{FROM_MAIL}}>
+To: <{{TO_MAIL}}>
+MIME-Version: 1.0
+Content-Type: multipart/alternative; boundary=frontier
+Subject: {{SUBJECT}}
+
+--frontier
+Content-Type: text/plain;
+charset="utf-8"
+Content-Transfer-Encoding: 8bit
+
+Hello,
+
+This is a test mail send by mail-sender.
+
+More info on: https://github.com/ruyadorno/mail-sender
+
+--frontier
+Content-Type: text/html;
+
+<html>
+<head>
+<title>mail-sender</title>
+</head>
+<body>
+<h1>Hello,</h1>
+<p>This is a test mail send by mail-sender.</p>
+<p>More info on: <a href="https://github.com/ruyadorno/mail-sender">https://github.com/ruyadorno/mail-sender</a></p>
+
+</body>
+</html>
+
+--frontier--
