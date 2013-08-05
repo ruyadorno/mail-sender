@@ -13,6 +13,7 @@ DESCRIPTION = """Send an email using smtp and plain python.
 SMTP settings can be added on config.py file;
 The subject and email can be set on user input."""
 parser = argparse.ArgumentParser(description=DESCRIPTION)
+parser.parse_args()
 
 
 def get_subject(subject):
