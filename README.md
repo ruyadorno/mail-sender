@@ -15,6 +15,18 @@ To run the script just go on the shell:
 ./sendmail.py
 ```
 
+To specify a custom template file:
+
+```sh
+./sendmail.py -t /somefile.html
+```
+
+For more help:
+
+```sh
+./sendmail.py --help
+```
+
 ## License ##
 
 Released under the [MIT License](http://www.opensource.org/licenses/mit-license.php).

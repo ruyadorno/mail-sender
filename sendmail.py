@@ -13,23 +13,31 @@ DESCRIPTION = """Send an email using smtp and python.
 SMTP settings can be added on a config.py file inside the same folder of script.
  The subject and email can be set on user input."""
 parser = argparse.ArgumentParser(description=DESCRIPTION)
-parser.parse_args()
+parser.add_argument('-t', '--template', help='Custom template file to be used.')
+args = parser.parse_args()
 
 
 def get_subject(subject):
     subject_base64 = base64.encodestring(subject).strip()
     return "=?UTF-8?B?%s?=" % subject_base64
 
-def get_file():
+def get_file(template_file):
     try:
-        file = open(config.smtp_template, 'r')
+        file = open(template_file, 'r')
     except IOError:
         print 'Template file does not exist.'
         exit()
     return file
 
-def get_message(subject, mail_to):
-    file = get_file()
+def get_template_file(custom_template):
+    if custom_template == None or custom_template == '':
+        return config.smtp_template
+    else:
+        return custom_template
+
+def get_message(subject, mail_to, custom_template):
+    file_name = get_template_file(custom_template)
+    file = get_file(file_name)
     msg = file.read()
     msg = msg.replace('{{FROM_MAIL}}', config.smtp_mail) \
         .replace('{{FROM_NAME}}', config.smtp_name) \
@@ -74,7 +82,7 @@ def sendmail(smtp, mail_to, message):
 
 mail_to = raw_input('E-mail: ')
 subject = get_subject( raw_input('Subject: ') )
-message = get_message(subject, mail_to)
+message = get_message(subject, mail_to, args.template)
 
 smtp_mail(mail_to, message)
 
